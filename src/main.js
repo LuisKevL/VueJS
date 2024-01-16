@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-
+import router from './router/index'
 import './assets/main.css'
 
 
@@ -16,5 +16,6 @@ Vue.use(IconsPlugin)
 
 
 new Vue({
+  router,
   render: (h) => h(App)
 }).$mount('#app')
