@@ -1,6 +1,23 @@
 <script setup>
+import { ref } from 'vue';
 import router from "../router/index";
+
+const items = ref([
+  {
+    text: "Tienda de juguetes",
+    to: { name: 'juguetes' },
+  },
+  {
+    text: "Electrónicos",
+    to: { name: 'electronicos' },
+  },
+  {
+    text: "JuegosVideo",
+    to: { name: 'juegosvideo' },
+  }
+]);
 </script>
+
 <template>
   <div>
     <b-navbar toggleable="lg" type="dark" variant="info">
@@ -13,6 +30,10 @@ import router from "../router/index";
           <b-nav-item href="#/inicio">Inicio</b-nav-item>
           <b-nav-item href="#/pagina2">Página 2</b-nav-item>
           <b-nav-item href="#/pagina3">Página 3</b-nav-item>
+          <!-- Iterar sobre los elementos de items -->
+          <b-nav-item v-for="item in items" :key="item.text">
+            <b-link :to="item.to">{{ item.text }}</b-link>
+          </b-nav-item>
         </b-navbar-nav>
       </b-collapse>
       <b-button v-b-toggle.sidebar-1>Toggle Sidebar</b-button>
@@ -25,51 +46,8 @@ import router from "../router/index";
             dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
             ac consectetur ac, vestibulum at eros.
           </p>
-          <div class="card" style="width: 260px">
-            <b-nav-item
-              ><b-link :to="{ name: 'Tienda de juguetes' }"
-                >Tienda de juguetes</b-link
-              >
-            </b-nav-item>
-
-            <b-nav-item
-              ><b-link :to="{ name: 'pagina2' }">Electrónicos</b-link>
-            </b-nav-item>
-
-            <b-nav-item
-              ><b-link :to="{ name: 'pagina3' }">Juegos de video</b-link>
-            </b-nav-item>
-
-            <b-nav-item
-              ><b-link :to="{ name: 'pagina3' }">Estufas</b-link>
-            </b-nav-item>
-
-            <b-nav-item
-              ><b-link :to="{ name: 'pagina3' }"
-                >Detergentes industriales
-              </b-link>
-            </b-nav-item>
-
-            <b-nav-item
-              ><b-link :to="{ name: 'pagina3' }">Productos de limpieza </b-link>
-            </b-nav-item>
-
-            <b-nav-item
-              ><b-link :to="{ name: 'pagina3' }">
-                Tienda de productos para el hogar</b-link
-              >
-            </b-nav-item>
-
-            <b-nav-item
-              ><b-link :to="{ name: 'pagina3' }"
-                >Tienda de electrodomésticos
-              </b-link>
-            </b-nav-item>
-          </div>
         </div>
       </b-sidebar>
     </div>
   </div>
 </template>
-
-
