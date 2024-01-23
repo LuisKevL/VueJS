@@ -40,14 +40,21 @@ const items = ref([
     </b-navbar>
     <div>
       <b-sidebar id="sidebar-1" title="Sidebar" shadow>
-        <div class="px-3 py-2">
-          <p>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-            ac consectetur ac, vestibulum at eros.
-          </p>
-        </div>
-      </b-sidebar>
+            <div class="px-3 py-2">
+                <p>
+                    Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
+                    dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
+                    ac consectetur ac, vestibulum at eros.
+                </p>
+                <div class="card" style="width: 260px">
+                    <!-- Iterar sobre los elementos de items -->
+                    <router-link v-for="item in items" :key="item.text" :to="item.href" tag="b-nav-item"
+                        active-class="bg-secondary text-white">
+                        {{ item.text }}
+                    </router-link>
+                </div>
+            </div>
+        </b-sidebar>
     </div>
   </div>
 </template>

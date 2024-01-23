@@ -6,9 +6,8 @@ import router from "./router/index";
 
 <template>
   <div class="App">
-    <router-view> </router-view>
+    <router-view />
   </div>
 </template>
 <script>
-
 </script>
