@@ -4,9 +4,9 @@
     <form @submit.prevent="checkForm" action="https://vuejs.org/" method="post">
       <p v-if="errors.length">
         <b>Por favor, soluciona los errores:</b>
-        <ul>
-          <li v-for="error in errors" :key="error">{{ error }}</li>
-        </ul>
+      <ul>
+        <li v-for="error in errors" :key="error">{{ error }}</li>
+      </ul>
       </p>
 
       <p>
@@ -20,27 +20,29 @@
 
       <p>
         <label for="age">Fecha de nacimiento (menor de 18 años)</label>
-        <input id="age" style="margin-left: 10px;" v-model="age" type="date" name="age"  required>
+        <input id="age" style="margin-left: 10px;" v-model="age" type="date" name="age" :max="maxDate()" required>
       </p>
       <p>
         <label for="correo">Correo electrónico</label>
         <input id="correo" style="margin-left: 10px;" v-model="correo" type="email" name="correo" required>
       </p>
-      
+
       <p>
         <label for="tel">Número de teléfono</label>
         <input id="tel" style="margin-left: 10px;" v-model="tel" type="tel" name="tel" pattern="[0-9]{10}" required>
       </p>
-     
+
       <p>
         <label for="img">Subir fotografía (menos de 3MB)</label>
         <input id="img" style="margin-left: 10px;" type="file" accept="image/png" @change="handleImageUpload" required>
       </p>
 
-      
-        <div style="text-align: center;">
-        <input type="submit" style="color: rgb(255, 255, 255); background-color: green; border-color: green; margin: 0 auto;" value="Enviar Formulario">
-      </div>      
+
+      <div style="text-align: center;">
+        <input type="submit"
+          style="color: rgb(255, 255, 255); background-color: green; border-color: green; margin: 0 auto;"
+          value="Enviar Formulario">
+      </div>
     </form>
   </div>
 </template>
@@ -59,14 +61,20 @@ const img = ref(null);
 const maxDate = () => {
   const today = new Date();
   today.setFullYear(today.getFullYear() - 18);
-  return today.toISOString().split("T")[0];
+
+  // Formatear la fecha actual para el atributo 'max' del input de fecha
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
 };
 
 const checkForm = () => {
   errors.value = [];
 
-  if (!name.value) {
-    errors.value.push("Nombre requerido.");
+  if (!name.value || !/^[a-zA-Z]+ [a-zA-Z]+( [a-zA-Z]+)?$/.test(name.value.trim())) {
+    errors.value.push("Nombre completo inválido. Ingrese nombre y al menos un apellido.");
   }
   if (!age.value) {
     errors.value.push("Edad requerida.");
@@ -85,7 +93,10 @@ const checkForm = () => {
   }
 
   if (errors.value.length === 0) {
-    console.log("Formulario enviado con éxito");
+    // Realizar alguna lógica adicional si es necesario
+
+    // Redirigir al usuario a otra página
+    window.location.href = "https://vuejs.org/";
   }
 };
 
