@@ -8,7 +8,7 @@ import Electronicos from "../components/Electronicos.vue";
 import JuegosVideo from "../components/JuegosVideo.vue";
 import Error404 from '../views/ErrorPages/Error404.vue';
 import Formulario from '../components/Formulario.vue';
-
+import Persona from '../components/Persona.vue'
 Vue.use(VueRouter);
 
 const routes = [
@@ -27,6 +27,7 @@ const routes = [
       { path: "/juguetes", name: "juguetes", component: Juguetes },
       { path: "/electronicos", name: "electronicos", component: Electronicos },
       { path: "/juegosvideo", name: "juegosvideo", component: JuegosVideo },
+      { path: '/paginacion', name: "paginacion", component: Persona},
       { path: '/formulario', name: 'formulario', component: Formulario },
       { path: '*', component: Error404 },
     ],
